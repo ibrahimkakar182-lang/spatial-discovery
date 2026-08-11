@@ -1,8 +1,8 @@
-import { Suspense, useMemo, useRef } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Environment, Lightformer, AdaptiveDpr, Preload } from "@react-three/drei";
 import * as THREE from "three";
-import { journey, lerp } from "@/lib/journey";
+import { journey, lerp, subscribeProgress } from "@/lib/journey";
 import { Hero } from "./scenes/Hero";
 import { Reading } from "./scenes/Reading";
 import { Listening } from "./scenes/Listening";
@@ -87,6 +87,20 @@ function fogColor(p: number, out: THREE.Color) {
   out.copy(FOG[FOG.length - 1]!.c);
 }
 
+/** Mounts a world only while the camera is near it — keeps draw calls and DOM labels scoped. */
+function Gate({ from, to, children }: { from: number; to: number; children: React.ReactNode }) {
+  const [on, setOn] = useState(journey.p >= from && journey.p <= to);
+  useEffect(
+    () =>
+      subscribeProgress((p) => {
+        const next = p >= from && p <= to;
+        setOn((prev) => (prev === next ? prev : next));
+      }),
+    [from, to],
+  );
+  return on ? <>{children}</> : null;
+}
+
 function Rig() {
   const { camera, scene } = useThree();
   const target = useMemo(() => new THREE.Vector3(), []);
@@ -95,7 +109,7 @@ function Rig() {
   const ray = useMemo(() => new THREE.Raycaster(), []);
   const hit = useMemo(() => new THREE.Vector3(), []);
   const ndc = useMemo(() => new THREE.Vector2(), []);
-  const fog = useMemo(() => new THREE.Fog("#006666", 30, 230), []);
+  const fog = useMemo(() => new THREE.Fog("#006666", 24, 132), []);
 
   useFrame((_, dt) => {
     const k = Math.min(1, dt * 4.5);
@@ -147,12 +161,24 @@ export function World() {
           <Lightformer intensity={1.1} position={[-14, 0, 6]} scale={[10, 18, 1]} color="#9FD8D2" />
           <Lightformer intensity={0.9} position={[14, -4, 4]} scale={[10, 14, 1]} color="#E9D9B4" />
         </Environment>
-        <Hero />
-        <Reading z={Z.reading} />
-        <Listening z={Z.listening} />
-        <Speaking z={Z.speaking} />
-        <Writing z={Z.writing} />
-        <System z={Z.system} />
+        <Gate from={0} to={0.3}>
+          <Hero />
+        </Gate>
+        <Gate from={0.14} to={0.5}>
+          <Reading z={Z.reading} />
+        </Gate>
+        <Gate from={0.36} to={0.7}>
+          <Listening z={Z.listening} />
+        </Gate>
+        <Gate from={0.58} to={0.86}>
+          <Speaking z={Z.speaking} />
+        </Gate>
+        <Gate from={0.78} to={1.01}>
+          <Writing z={Z.writing} />
+        </Gate>
+        <Gate from={0.9} to={1.01}>
+          <System z={Z.system} />
+        </Gate>
         <Preload all />
       </Suspense>
       <AdaptiveDpr pixelated={false} />
