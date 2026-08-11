@@ -11,7 +11,7 @@ import { readingPageTexture } from "../textures";
  */
 export function Hero() {
   const skin = useMemo(
-    () => makeXRayMaterial({ color: "#0b615f", roughness: 0.38, metalness: 0.35 }),
+    () => makeXRayMaterial({ color: "#12817c", roughness: 0.34, metalness: 0.45 }),
     [],
   );
   const edge = useMemo(() => MAT.champagne(), []);
@@ -67,7 +67,7 @@ export function Hero() {
         <boxGeometry args={size} />
       </mesh>
       <mesh material={edge} position={[0, 0, size[2] / 2 + 0.02]}>
-        <boxGeometry args={[size[0] * 0.985, 0.22, 0.06]} />
+        <boxGeometry args={[size[0] * 0.985, 0.34, 0.08]} />
       </mesh>
     </group>
   );
@@ -89,7 +89,7 @@ export function Hero() {
       </mesh>
 
       {/* hidden engine environments — only visible through the x-ray */}
-      <group ref={hidden} position={[0, 0, -15]}>
+      <group ref={hidden} position={[0, 0, -11]} scale={0.72}>
         <group position={[-13, 4, 0]} userData={{ y: 4 }}>
           <mesh material={paper} rotation={[0, 0.22, 0.03]}>
             <planeGeometry args={[11, 15]} />
