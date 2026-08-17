@@ -77,10 +77,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "TOEFL26PLUS" },
-      { name: "description", content: "TOEFL preparation built around how you perform." },
+      { title: "ttttttttt— Travel through the four TOEFL engines" },
+      { name: "description", content: "A continuous 3D journey through Reading, Listening, Speaking and Writing. TOEFL preparation built around how you actually perform." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { property: "og:title", content: "ttttttttt— Travel through the four TOEFL engines" },
+      { name: "twitter:title", content: "ttttttttt— Travel through the four TOEFL engines" },
+      { property: "og:description", content: "A continuous 3D journey through Reading, Listening, Speaking and Writing. TOEFL preparation built around how you actually perform." },
+      { name: "twitter:description", content: "A continuous 3D journey through Reading, Listening, Speaking and Writing. TOEFL preparation built around how you actually perform." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/777effb058ba5a18f96ac015545e9624/id-preview-f0a3551f--9c91bd4a-5a0b-48f1-ba2d-f97b00e06dfc.lovable.app-1786440257359.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/777effb058ba5a18f96ac015545e9624/id-preview-f0a3551f--9c91bd4a-5a0b-48f1-ba2d-f97b00e06dfc.lovable.app-1786440257359.png" },
     ],
     links: [
       {

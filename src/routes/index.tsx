@@ -13,17 +13,17 @@ const World = lazy(() =>
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "TOEFL26PLUS — Travel through the four TOEFL engines" },
+      { title: "ttttttttt— Travel through the four TOEFL engines" },
       {
         name: "description",
         content:
           "A continuous 3D journey through Reading, Listening, Speaking and Writing. TOEFL preparation built around how you actually perform.",
       },
-      { property: "og:title", content: "TOEFL26PLUS — Travel through the four TOEFL engines" },
+      { property: "og:title", content: "ttttttttt— Travel through the four TOEFL engines" },
       {
         property: "og:description",
         content:
-          "Scroll becomes a camera. Enter the Reading page, the Listening chamber, the Speaking sculpture and the Writing studio.",
+          "A continuous 3D journey through Reading, Listening, Speaking and Writing. TOEFL preparation built around how you actually perform.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
